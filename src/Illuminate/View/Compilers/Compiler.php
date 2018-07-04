@@ -48,7 +48,7 @@ abstract class Compiler
      */
     public function getCompiledPath($path)
     {
-        return $this->cachePath.'/'.sha1($path).'.php';
+        return $this->cachePath.'/'.md5_file($path).'.php';
     }
 
     /**
@@ -67,8 +67,6 @@ abstract class Compiler
         if (! $this->files->exists($compiled)) {
             return true;
         }
-
-        return $this->files->lastModified($path) >=
-               $this->files->lastModified($compiled);
+        return false;
     }
 }
